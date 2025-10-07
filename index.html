@@ -42,6 +42,9 @@
         <div class="container mx-auto px-6 py-12 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-teal-900">Esporotricose</h1>
             <p class="mt-4 text-lg text-teal-800">Um guia completo para os profissionais de saúde da Atenção Primária.</p>
+            <button id="open-modal-btn" class="mt-8 bg-white text-teal-700 font-bold py-2 px-6 rounded-full shadow-md hover:bg-slate-100 transition-transform transform hover:scale-105">
+                <i class="fas fa-graduation-cap mr-2"></i>Curso Livre
+            </button>
         </div>
     </header>
 
@@ -174,10 +177,22 @@
         <!-- Interactive Quiz Section -->
         <section class="mt-12">
             <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h2 class="text-3xl font-bold text-center mb-8 text-teal-900">Teste seu Conhecimento</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 text-teal-900">QUIZ</h2>
                 <div id="quiz-container" class="mx-auto max-w-2xl">
                     <!-- Quiz will be dynamically generated here -->
                 </div>
+            </div>
+        </section>
+
+        <!-- Final Test Button Section -->
+        <section class="mt-12 text-center">
+             <div class="flex flex-wrap justify-center gap-6">
+                <a href="https://espfloripa.github.io/cursoslivres/" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105 inline-block">
+                    Inscrição para o curso livre
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc36Pm_4MgQikdut-NyW-KGjjZacl7pBAtaIR1mY2xVEwjkrw/viewform?usp=sharing&ouid=110410574929128285229" target="_blank" rel="noopener noreferrer" class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105 inline-block">
+                    Teste de aproveitamento
+                </a>
             </div>
         </section>
 
@@ -192,43 +207,85 @@
         </div>
     </footer>
 
+    <!-- Modal -->
+    <div id="course-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 justify-center items-center p-4">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full relative">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="text-2xl font-bold text-teal-900 mb-4">Instruções do Curso Livre</h3>
+            <div class="text-slate-700 space-y-3">
+                <ol class="list-decimal list-inside">
+                    <li>Você deve clicar no botão disponível no fim desta página (ou <a href="https://espfloripa.github.io/cursoslivres/" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline font-semibold">aqui</a>) e preencher todos os campos para se inscrever no curso no mês corrente.</li>
+                    <li>Após a inscrição realizada, você tem até o último dia do mês para responder o teste de aproveitamento disponibilizado no botão no fim da página (não confundir com o Quiz!).</li>
+                    <li>Ao responder o teste de aproveitamento coloque o nome completo e CPF conforme você colocou no link de inscrição.</li>
+                    <li>A nota de corte para aprovação é de 80%.</li>
+                    <li>O teste de aproveitamento só permite uma resposta por participante, caso você não seja aprovado poderá repetir o curso no mês seguinte.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // --- ACCORDION SCRIPT ---
         const accordionContainer = document.getElementById('accordion-container');
-        if(accordionContainer) {
-            const accordionHeaders = accordionContainer.querySelectorAll('.accordion-header');
-            accordionHeaders.forEach(header => {
+        if (accordionContainer) {
+            const items = accordionContainer.querySelectorAll('.accordion-item');
+            items.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
                 header.addEventListener('click', () => {
-                    const accordionItem = header.parentElement;
-                    const accordionContent = header.nextElementSibling;
-                    const isActive = accordionItem.classList.contains('active');
-
-                    // Close all items
-                    accordionContainer.querySelectorAll('.accordion-item').forEach(item => {
-                        item.classList.remove('active');
-                        item.querySelector('.accordion-content').style.maxHeight = '0px';
+                    const isActive = item.classList.contains('active');
+                    items.forEach(i => {
+                        i.classList.remove('active');
+                        const cont = i.querySelector('.accordion-content');
+                        if (cont) cont.style.maxHeight = null;
                     });
-
-                    // Open the clicked one if it wasn't active
                     if (!isActive) {
-                        accordionItem.classList.add('active');
-                        accordionContent.style.maxHeight = accordionContent.scrollHeight + 32 + 'px';
+                        item.classList.add('active');
+                        if (content) content.style.maxHeight = content.scrollHeight + "px";
                     }
                 });
+            });
+        }
+
+        // --- MODAL SCRIPT ---
+        const openModalBtn = document.getElementById('open-modal-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const courseModal = document.getElementById('course-modal');
+
+        if (openModalBtn && closeModalBtn && courseModal) {
+            openModalBtn.addEventListener('click', () => {
+                courseModal.classList.remove('hidden');
+                courseModal.classList.add('flex');
+            });
+
+            const closeModal = () => {
+                courseModal.classList.add('hidden');
+                courseModal.classList.remove('flex');
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+
+            courseModal.addEventListener('click', (e) => {
+                if (e.target === courseModal) {
+                    closeModal();
+                }
             });
         }
 
         // --- QUIZ SCRIPT ---
         const quizData = [
             { question: "Qual é a principal forma de transmissão da esporotricose para seres humanos, de acordo com o cenário epidemiológico atual em Florianópolis?", hint: "Pense no papel que os animais de estimação, especialmente um tipo, desempenham na disseminação da doença mencionada nos documentos.", options: [{ text: "Contato com solo ou plantas contaminadas durante a jardinagem.", correct: false, rationale: "Embora o fungo viva na natureza, esta não é a principal fonte de infecção para humanos no surto atual." },{ text: "Arranhaduras ou mordeduras de felinos doentes.", correct: true, rationale: "O documento técnico destaca que os felinos são os principais vetores na cadeia de transmissão para humanos." },{ text: "Ingestão de água ou alimentos contaminados pelo fungo.", correct: false, rationale: "A transmissão da esporotricose não ocorre por via digestiva." },{ text: "Picadas de insetos que tiveram contato com animais infectados.", correct: false, rationale: "A doença não é transmitida por vetores como mosquitos ou outros insetos." }] },
-            { question: "Qual é a apresentação clínica mais frequente da esporotricose em humanos?", hint: "Lembre-se da imagem que mostra a evolução das lesões no braço de um paciente, formando uma espécie de \"cordão\".", options: [{ text: "Forma cutânea, com uma única ferida que não cicatriza.", correct: false, rationale: "Embora a forma cutânea exista, não é a mais comum descrita no material." },{ text: "Forma disseminada, afetando múltiplos órgãos internos simultaneamente.", correct: false, rationale: "Esta é a forma mais grave e rara da doença, não a mais frequente." },{ text: "Forma linfocutânea, com nódulos que seguem o trajeto do sistema linfático.", correct: true, rationale: "O material de referência aponta esta como a manifestação mais comum da doença." },{ text: "Forma extracutânea, com manifestações apenas nos olhos ou ossos, sem lesões na pele.", correct: false, rationale: "Esta forma é menos comum e caracterizada pela ausência de lesões cutâneas." }] },
-            { question: "Sobre a notificação da esporotricose humana, qual é a conduta correta para um profissional de saúde?", hint: "A vigilância epidemiológica precisa agir rapidamente. O que permite essa agilidade?", options: [{ text: "A notificação é obrigatória apenas para casos confirmados por biópsia.", correct: false, rationale: "A orientação é notificar antes mesmo da confirmação laboratorial para agilizar a vigilância." },{ text: "A notificação deve ser realizada a partir da suspeita do caso.", correct: true, rationale: "A nota técnica informa que a notificação é compulsória e deve ser feita já na suspeita clínica-epidemiológica." },{ text: "Apenas os casos em animais precisam ser notificados.", correct: false, rationale: "Tanto os casos humanos quanto os animais são de notificação compulsória." },{ text: "A esporotricose não é uma doença de notificação compulsória no município.", correct: false, rationale: "A doença é de notificação compulsória em nível municipal, estadual e nacional." }] },
-            { question: "Qual é o medicamento de primeira escolha, disponibilizado gratuitamente pelo SUS, para o tratamento da esporotricose humana em adultos?", hint: "O resumo clínico menciona um antifúngico oral como tratamento padrão.", options: [{ text: "Anfotericina B", correct: false, rationale: "Este medicamento é reservado para os casos mais graves da doença, não sendo a primeira escolha." },{ text: "Terbinafina", correct: false, rationale: "Apesar de ser uma opção, a nota técnica menciona que este medicamento não está disponível no SUS." },{ text: "Penicilina", correct: false, rationale: "A penicilina é um antibiótico usado para infecções bacterianas, não sendo eficaz contra fungos." },{ text: "Itraconazol", correct: true, rationale: "Este é o antifúngico de escolha para as formas mais comuns da doença e é fornecido pelo SUS." }] },
-            { question: "Qual é o período de incubação mais comum da esporotricose, desde o contato com o fungo até o aparecimento dos primeiros sintomas?", hint: "O material aponta um intervalo que geralmente se encaixa dentro de um mês.", options: [{ text: "De 24 a 48 horas.", correct: false, rationale: "Este período é muito curto para o desenvolvimento da micose." },{ text: "De 7 a 30 dias.", correct: true, rationale: "O material informativo indica este como o intervalo de tempo mais usual para o surgimento das lesões." },{ text: "Aproximadamente 6 meses.", correct: false, rationale: "Embora possa chegar a 6 meses em casos raros, este não é o período comum." },{ text: "Mais de um ano.", correct: false, rationale: "Um período de incubação tão longo não é descrito para esta doença." }] },
-            { question: "Para uma gestante com esporotricose não complicada, qual é o tratamento mais recomendado?", hint: "Pense em uma alternativa de tratamento que não envolva medicamentos sistêmicos.", options: [{ text: "Uso de Itraconazol em doses menores.", correct: false, rationale: "Os antifúngicos azóis, como o Itraconazol, são contraindicados na gestação devido ao risco teratogênico." },{ text: "Aguardar o fim da gestação para iniciar o tratamento.", correct: false, rationale: "O tratamento não deve ser adiado, pois a infecção pode progredir." },{ text: "Termoterapia (aplicação de calor local).", correct: true, rationale: "Devido às contraindicações dos medicamentos, a termoterapia é indicada como método físico adjuvante para gestantes." },{ text: "Anfotericina B intravenosa.", correct: false, rationale: "A Anfotericina B é reservada para casos graves, não para formas não complicadas." }] },
-            { question: "Ao suspeitar de um caso de esporotricose no Centro de Saúde, além da notificação, qual procedimento é orientado a ser feito no momento do atendimento?", hint: "O protocolo inclui a investigação de outras doenças que podem coexistir ou ter sintomas parecidos.", options: [{ text: "Realizar imediatamente a biópsia da lesão.", correct: false, rationale: "A biópsia é realizada por um especialista (dermatologista) após encaminhamento, não no primeiro atendimento no CS." },{ text: "Iniciar o tratamento com Itraconazol e aguardar a melhora.", correct: false, rationale: "O tratamento pode ser orientado após a avaliação da vigilância, mas há outros passos a seguir antes." },{ text: "Realizar testes rápidos para HIV e Sífilis.", correct: true, rationale: "A nota técnica especifica a realização desses testes como parte do protocolo inicial de atendimento." },{ text: "Encaminhar o paciente diretamente para o hospital.", correct: false, rationale: "O manejo inicial do caso é feito na Atenção Primária, que encaminhará se necessário." }] },
-            { question: "Qual é a orientação correta para um animal que morreu com suspeita de esporotricose?", hint: "A questão envolve saúde pública e o controle da disseminação do fungo no ambiente.", options: [{ text: "Deve ser enterrado em um local profundo no quintal para evitar contaminação.", correct: false, rationale: "Enterrar o animal pode contaminar o solo com o fungo, representando um risco." },{ text: "Deve ser descartado no lixo comum, em um saco bem fechado.", correct: false, rationale: "O descarte no lixo comum também apresenta risco de contaminar o ambiente." },{ text: "O tutor deve acionar o Departamento de Controle de Zoonoses.", correct: true, rationale: "Esta é a orientação oficial para garantir o manejo adequado do corpo e evitar a contaminação ambiental." },{ text: "O corpo deve ser levado a uma clínica veterinária para descarte.", correct: false, rationale: "A responsabilidade pelo manejo do corpo em casos de zoonoses é do serviço público de vigilância." }] },
-            { question: "Para pacientes que realizaram cirurgia bariátrica, o tratamento com Itraconazol pode apresentar um desafio. Por quê?", hint: "Pense em como a cirurgia bariátrica muda o sistema digestivo e como isso pode afetar a forma como os remédios orais funcionam.", options: [{ text: "O medicamento causa reações alérgicas graves nesse grupo de pacientes.", correct: false, rationale: "Não há relatos de aumento de alergia, mas sim de um problema relacionado à eficácia." },{ text: "A absorção do Itraconazol pode ser ineficaz devido às alterações no trato gastrointestinal.", correct: true, rationale: "A nota técnica explica que a cirurgia altera o pH e a anatomia do TGI, o que prejudica a absorção de medicamentos como o Itraconazol." },{ text: "O Itraconazol interage perigosamente com as vitaminas que esses pacientes tomam.", correct: false, rationale: "Embora interações medicamentosas existam, o principal problema relatado é a falta de absorção do antifúngico." },{ text: "A dose do medicamento precisa ser o dobro da recomendada para fazer efeito.", correct: false, rationale: "O problema não é a dose, mas a capacidade do organismo de absorver o medicamento; simplesmente dobrar a dose não resolveria." }] },
-            { question: "Na suspeita de lesão por esporotricose, uma medida caseira é recomendada como adjuvante enquanto se busca atendimento médico. Qual é ela?", hint: "O fungo Sporothrix não se desenvolve bem em temperaturas mais elevadas.", options: [{ text: "Aplicação de álcool ou iodo na ferida.", correct: false, rationale: "A aplicação de substâncias irritantes não é recomendada; a orientação principal é a limpeza com água e sabão." },{ text: "Manter a ferida coberta com um curativo o tempo todo.", correct: false, rationale: "Embora a proteção seja importante, a recomendação adjuvante específica envolve outra abordagem." },{ text: "Realização de compressas mornas a quentes no local.", correct: true, rationale: "A nota técnica menciona que o calor local ajuda a reduzir a proliferação do fungo, que é sensível a temperaturas mais altas." },{ text: "Uso de pomadas antibióticas de venda livre.", correct: false, rationale: "Pomadas antibióticas tratam bactérias e não teriam efeito sobre o fungo causador da esporotricose." }] }
+            { question: "Qual é a forma clínica mais frequente da esporotricose?", hint: "Esta forma é caracterizada por lesões que seguem um caminho específico no corpo.", options: [{ text: "Cutânea, com uma única ferida que não cicatriza.", correct: false, rationale: "A forma cutânea fixa existe, mas não é a mais comum." },{ text: "Linfocutânea, com nódulos que seguem o trajeto do sistema linfático.", correct: true, rationale: "Correto. Esta é a apresentação mais clássica e frequente da doença." },{ text: "Disseminada, afetando múltiplos órgãos internos simultaneamente.", correct: false, rationale: "A forma disseminada é a mais grave, porém rara, ocorrendo principalmente em pacientes imunocomprometidos." },{ text: "Ocular, causando conjuntivite e lesões na pálpebra.", correct: false, rationale: "A forma ocular é um tipo de manifestação extracutânea e não é a mais frequente." }] },
+            { question: "Quando a notificação de um caso de esporotricose deve ser realizada?", hint: "A vigilância epidemiológica precisa agir rapidamente para controlar surtos.", options: [{ text: "Apenas após a confirmação laboratorial com biópsia.", correct: false, rationale: "A notificação não deve aguardar a confirmação laboratorial, que pode demorar." },{ text: "Somente quando o paciente inicia o tratamento com Itraconazol.", correct: false, rationale: "A notificação precede o tratamento para que a Vigilância avalie o caso e libere a medicação." },{ text: "Na suspeita do caso, com base nos critérios clínico-epidemiológicos.", correct: true, rationale: "Correto. A notificação é obrigatória na suspeita para garantir a agilidade na resposta da vigilância." },{ text: "Apenas para casos que envolvem transmissão a partir de um animal.", correct: false, rationale: "Todos os casos suspeitos em humanos devem ser notificados, independentemente da forma de contágio." }] },
+            { question: "Qual o tratamento de primeira escolha para a esporotricose em adultos, disponibilizado pelo SUS?", hint: "É um antifúngico oral mencionado várias vezes no guia.", options: [{ text: "Anfotericina B.", correct: false, rationale: "A Anfotericina B é reservada para casos graves e/ou disseminados." },{ text: "Termoterapia.", correct: false, rationale: "A Termoterapia é a principal indicação para gestantes com formas não complicadas, não para a população adulta em geral." },{ text: "Terbinafina.", correct: false, rationale: "A Terbinafina é uma alternativa, mas não está disponível no SUS para este fim, sendo o Itraconazol a primeira escolha." },{ text: "Itraconazol.", correct: true, rationale: "Exato. O Itraconazol é o medicamento de primeira linha para as formas cutâneas e linfocutâneas em adultos." }] },
+            { question: "Qual a conduta recomendada para uma gestante com diagnóstico de esporotricose não complicada?", hint: "Os antifúngicos orais comuns são contraindicados na gestação.", options: [{ text: "Iniciar Itraconazol com metade da dose.", correct: false, rationale: "O Itraconazol é teratogênico e deve ser evitado durante a gestação." },{ text: "Aguardar o fim da gestação para iniciar qualquer tratamento.", correct: false, rationale: "Não tratar pode levar à progressão da doença. Existe uma alternativa mais segura." },{ text: "Realizar Termoterapia (aplicação de calor local).", correct: true, rationale: "Correto. A Termoterapia é a opção mais segura para gestantes com formas clínicas não complicadas, pois o fungo é sensível a altas temperaturas." },{ text: "Iniciar imediatamente Anfotericina B intravenosa.", correct: false, rationale: "A Anfotericina B é reservada para casos graves em gestantes, não para formas não complicadas." }] },
+            { question: "Qual o primeiro passo no fluxo de atendimento de um caso suspeito de esporotricose na Atenção Primária?", hint: "Antes de notificar e solicitar exames, o que o profissional precisa fazer?", options: [{ text: "Encaminhar diretamente para o dermatologista.", correct: false, rationale: "O encaminhamento pode ser necessário, mas não é o primeiro passo. O manejo inicial é feito na APS." },{ text: "Identificar o caso suspeito e realizar testes rápidos de HIV e Sífilis.", correct: true, rationale: "Isso mesmo. A identificação do caso suspeito e a testagem para comorbidades como HIV e Sífilis são os primeiros passos do fluxo." },{ text: "Preencher o formulário de solicitação de Itraconazol.", correct: false, rationale: "A solicitação do medicamento é um passo posterior, após a notificação e avaliação inicial." },{ text: "Coletar material para biópsia no próprio centro de saúde.", correct: false, rationale: "A biópsia é realizada pelo dermatologista após encaminhamento, não na consulta inicial na APS." }] },
+            { question: "O que NUNCA se deve fazer com um animal que morreu com suspeita de esporotricose?", hint: "A preocupação é a contaminação ambiental.", options: [{ text: "Entregar para o serviço de zoonoses.", correct: false, rationale: "Esta é a ação correta a ser feita, não a que deve ser evitada." },{ text: "Enterrar no quintal ou descartar no lixo comum.", correct: true, rationale: "Exato. Essa prática contamina o solo e o ambiente com o fungo, perpetuando o ciclo da doença. O correto é acionar o Controle de Zoonoses." },{ text: "Realizar a limpeza do local onde o animal ficava com água sanitária.", correct: false, rationale: "Esta é uma medida de prevenção importante e recomendada." },{ text: "Notificar a vigilância epidemiológica animal.", correct: false, rationale: "A notificação é fundamental para o mapeamento e controle do surto." }] },
+            { question: "Qual é o período de incubação mais comum para a esporotricose?", hint: "É um intervalo de semanas.", options: [{ text: "24 a 48 horas.", correct: false, rationale: "Este período é muito curto para a esporotricose." },{ text: "1 a 2 meses.", correct: false, rationale: "Este período é possível, mas não o mais comum. O intervalo mais frequente é mais curto." },{ text: "De 7 a 30 dias.", correct: true, rationale: "Correto. Embora possa variar, o período de incubação mais comum é de uma a quatro semanas." },{ text: "Até 1 ano.", correct: false, rationale: "Este período é muito longo. O máximo relatado é de cerca de 6 meses." }] },
+            { question: "Qual a conduta correta ao encontrar um animal doente ou com suspeita de esporotricose?", hint: "A responsabilidade do tutor é crucial para a saúde pública.", options: [{ text: "Abandonar o animal em um local afastado para evitar contaminação.", correct: false, rationale: "Abandonar um animal é crime e a pior conduta, pois espalha a doença. O animal precisa de tratamento." },{ text: "Isolá-lo de outros animais, procurar um médico veterinário e jamais abandoná-lo.", correct: true, rationale: "Perfeito. Cuidado, tratamento e isolamento são as chaves para proteger tanto o animal doente quanto a comunidade." },{ text: "Tentar tratar as feridas em casa com pomadas comuns.", correct: false, rationale: "O tratamento requer antifúngicos específicos prescritos por um veterinário e não deve ser feito em casa sem orientação." },{ text: "Avisar os vizinhos, mas permitir que o animal continue solto.", correct: false, rationale: "Permitir que o animal fique solto aumenta o risco de transmissão para outros animais e pessoas." }] },
+            { question: "Por que pacientes que realizaram cirurgia bariátrica (bypass gástrico) exigem atenção especial no tratamento da esporotricose?", hint: "A cirurgia altera a forma como o corpo processa o que é ingerido.", options: [{ text: "Eles têm maior risco de desenvolver a forma disseminada da doença.", correct: false, rationale: "Não há evidências de que tenham maior risco de desenvolver formas graves, a preocupação é com a eficácia do tratamento." },{ text: "A absorção do Itraconazol pode ser ineficaz devido às alterações no trato gastrointestinal.", correct: true, rationale: "Correto. A cirurgia altera o pH e a anatomia do TGI, o que pode prejudicar a absorção do Itraconazol, levando à falha terapêutica." },{ text: "Eles não podem receber Anfotericina B por risco de toxicidade renal.", correct: false, rationale: "Não há contraindicação específica da Anfotericina B para pacientes bariátricos." },{ text: "O tratamento de escolha para eles é sempre a Termoterapia.", correct: false, rationale: "A Termoterapia não seria eficaz para as formas mais comuns da doença e não é o tratamento padrão para este grupo." }] }
         ];
 
         const quizContainer = document.getElementById('quiz-container');
@@ -236,105 +293,105 @@
         let score = 0;
 
         function renderQuiz() {
-            quizContainer.innerHTML = ''; // Clear previous content
+            if (!quizContainer) return;
+            quizContainer.innerHTML = '';
             if (currentQuestionIndex < quizData.length) {
                 const questionData = quizData[currentQuestionIndex];
-                
                 const questionElement = document.createElement('div');
                 questionElement.className = 'mb-6';
                 questionElement.innerHTML = `
-                    <p class="text-lg font-semibold mb-1">Pergunta ${currentQuestionIndex + 1} de ${quizData.length}</p>
-                    <h3 class="text-xl text-slate-800">${questionData.question}</h3>
-                    <p class="text-sm text-slate-500 mt-2"><em>Dica: ${questionData.hint}</em></p>
+                    <p class="text-xl font-semibold mb-2 text-slate-900">${currentQuestionIndex + 1}. ${questionData.question}</p>
+                    <p class="text-sm italic text-slate-500 mb-4">${questionData.hint}</p>
                 `;
-
                 const optionsElement = document.createElement('div');
                 optionsElement.className = 'space-y-3';
-                
                 questionData.options.forEach((option, index) => {
                     const optionButton = document.createElement('button');
-                    optionButton.className = 'w-full text-left p-4 rounded-lg border border-slate-300 bg-slate-50 hover:bg-slate-100 transition-colors';
+                    optionButton.className = 'w-full text-left p-3 bg-slate-100 rounded-lg hover:bg-teal-100 transition-colors';
                     optionButton.textContent = option.text;
-                    optionButton.onclick = () => selectAnswer(optionButton, option, questionData.options);
+                    optionButton.onclick = () => selectAnswer(index);
                     optionsElement.appendChild(optionButton);
                 });
-
+                questionElement.appendChild(optionsElement);
                 quizContainer.appendChild(questionElement);
-                quizContainer.appendChild(optionsElement);
-
             } else {
-                showResults();
+                showResult();
             }
         }
-        
-        function selectAnswer(button, selectedOption, allOptions) {
-            const parent = button.parentElement;
-            const buttons = parent.querySelectorAll('button');
+
+        function selectAnswer(selectedIndex) {
+            const questionData = quizData[currentQuestionIndex];
+            const selectedOption = questionData.options[selectedIndex];
             
-            buttons.forEach((btn, index) => {
-                btn.disabled = true;
-                const option = allOptions[index];
-                
-                let feedbackClass = '';
-                let feedbackIcon = '';
-
-                if (option.correct) {
-                    feedbackClass = 'bg-green-100 border-green-500 text-green-800';
-                    feedbackIcon = '<i class="fas fa-check-circle mr-2"></i>';
-                } else if (option === selectedOption && !option.correct) {
-                    feedbackClass = 'bg-red-100 border-red-500 text-red-800';
-                    feedbackIcon = '<i class="fas fa-times-circle mr-2"></i>';
-                } else {
-                    feedbackClass = 'bg-slate-100 border-slate-300 text-slate-500';
-                }
-                
-                btn.className = `w-full text-left p-4 rounded-lg border ${feedbackClass}`;
-                
-                const rationaleElement = document.createElement('p');
-                rationaleElement.className = 'text-sm mt-2 px-4';
-                rationaleElement.innerHTML = `${feedbackIcon} ${option.rationale}`;
-                btn.after(rationaleElement);
-            });
-
             if (selectedOption.correct) {
                 score++;
             }
+
+            // Show feedback
+            const feedbackElement = document.createElement('div');
+            feedbackElement.className = 'mt-4 p-4 rounded-lg';
+            let feedbackHTML = '';
+            questionData.options.forEach((opt, idx) => {
+                let colorClass = 'bg-slate-100';
+                let indicator = '';
+                if(opt.correct) {
+                   colorClass = 'bg-green-100 border-l-4 border-green-500';
+                   indicator = '<span class="font-bold text-green-700">[Correta]</span> ';
+                } else if (idx === selectedIndex && !opt.correct) {
+                   colorClass = 'bg-red-100 border-l-4 border-red-500';
+                   indicator = '<span class="font-bold text-red-700">[Sua Resposta]</span> ';
+                }
+                feedbackHTML += `<div class="p-3 mb-2 rounded ${colorClass}">${indicator}<strong>${opt.text}</strong><p class="text-sm mt-1 text-slate-600">${opt.rationale}</p></div>`;
+            });
             
+            quizContainer.innerHTML = feedbackHTML;
+
             const nextButton = document.createElement('button');
-            nextButton.textContent = currentQuestionIndex < quizData.length - 1 ? 'Próxima Pergunta' : 'Ver Resultados';
-            nextButton.className = 'mt-6 w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105';
+            nextButton.textContent = currentQuestionIndex === quizData.length - 1 ? 'Ver Resultado' : 'Próxima Pergunta';
+            nextButton.className = 'mt-4 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-full transition-transform transform hover:scale-105';
             nextButton.onclick = () => {
                 currentQuestionIndex++;
                 renderQuiz();
             };
             quizContainer.appendChild(nextButton);
         }
-        
-        function showResults() {
-             quizContainer.innerHTML = `
+
+        function showResult() {
+            if (!quizContainer) return;
+            const percentage = (score / quizData.length) * 100;
+            let resultMessage = '';
+            if (percentage >= 80) {
+                resultMessage = `<p class="text-lg text-green-700">Parabéns! Você demonstrou excelente conhecimento sobre o tema.</p>`;
+            } else if (percentage >= 50) {
+                resultMessage = `<p class="text-lg text-yellow-700">Bom trabalho! Continue revisando o material para aprimorar seus conhecimentos.</p>`;
+            } else {
+                resultMessage = `<p class="text-lg text-red-700">Recomendamos revisar o material com atenção para reforçar os pontos chave.</p>`;
+            }
+
+            quizContainer.innerHTML = `
                 <div class="text-center">
                     <h3 class="text-2xl font-bold mb-4">Quiz Finalizado!</h3>
-                    <p class="text-lg mb-4">Sua pontuação final foi:</p>
-                    <p class="text-5xl font-bold text-teal-700 mb-6">${score} de ${quizData.length}</p>
-                    <button class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105" onclick="restartQuiz()">
-                        Refazer o Quiz
+                    <p class="text-xl mb-4">Você acertou ${score} de ${quizData.length} perguntas (${percentage.toFixed(0)}%).</p>
+                    ${resultMessage}
+                    <button class="mt-6 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-full" onclick="restartQuiz()">
+                        Tentar Novamente
                     </button>
                 </div>
-             `;
+            `;
         }
-
+        
         function restartQuiz() {
             currentQuestionIndex = 0;
             score = 0;
             renderQuiz();
         }
 
-        // Initial render
-        renderQuiz();
-
+        document.addEventListener('DOMContentLoaded', renderQuiz);
     </script>
+
 </body>
 </html>
+
 
 
 
