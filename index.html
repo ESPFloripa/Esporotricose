@@ -10,6 +10,10 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .section-anchor {
+            scroll-margin-top: 80px; /* Adjust this value if nav height changes */
         }
         .card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -37,13 +41,40 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-    <!-- Header Section -->
+    <!-- Navigation Bar -->
+    <nav class="bg-teal-50 shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-teal-900">Esporotricose</div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#resumo-clinico" class="text-teal-800 hover:text-teal-600 font-medium">Resumo Clínico</a>
+                    <a href="#acesso-rapido" class="text-teal-800 hover:text-teal-600 font-medium">Formatos Rápidos</a>
+                    <a href="#recursos" class="text-teal-800 hover:text-teal-600 font-medium">Recursos</a>
+                    <a href="#quiz-secao" class="text-teal-800 hover:text-teal-600 font-medium">Quiz</a>
+                    <a href="#curso-livre" class="text-teal-800 hover:text-teal-600 font-medium">Curso Livre</a>
+                </div>
+                <button id="hamburger-btn" class="md:hidden text-teal-900">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+             <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden py-4">
+                <a href="#resumo-clinico" class="block py-2 px-4 text-teal-800 hover:bg-teal-100 rounded">Resumo Clínico</a>
+                <a href="#acesso-rapido" class="block py-2 px-4 text-teal-800 hover:bg-teal-100 rounded">Formatos Rápidos</a>
+                <a href="#recursos" class="block py-2 px-4 text-teal-800 hover:bg-teal-100 rounded">Recursos</a>
+                <a href="#quiz-secao" class="block py-2 px-4 text-teal-800 hover:bg-teal-100 rounded">Quiz</a>
+                <a href="#curso-livre" class="block py-2 px-4 text-teal-800 hover:bg-teal-100 rounded">Curso Livre</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section (Hero) -->
     <header class="bg-teal-50">
         <div class="container mx-auto px-6 py-12 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-teal-900">Esporotricose</h1>
             <p class="mt-4 text-lg text-teal-800">Um guia completo para os profissionais de saúde da Atenção Primária.</p>
             <button id="open-modal-btn" class="mt-8 bg-white text-teal-700 font-bold py-2 px-6 rounded-full shadow-md hover:bg-slate-100 transition-transform transform hover:scale-105">
-                <i class="fas fa-graduation-cap mr-2"></i>Curso Livre
+                <i class="fas fa-graduation-cap mr-2"></i>Instruções do Curso
             </button>
         </div>
     </header>
@@ -52,7 +83,7 @@
     <main class="container mx-auto px-6 py-10">
 
         <!-- Clinical Summary Section -->
-        <section>
+        <section id="resumo-clinico" class="section-anchor">
             <h2 class="text-3xl font-bold text-center mb-8 text-teal-900">O que todo Profissional precisa saber!</h2>
             <div class="space-y-4" id="accordion-container">
                 <!-- Accordion Item 1 -->
@@ -115,7 +146,7 @@
         </section>
 
         <!-- Quick Access Section -->
-        <section class="mt-12">
+        <section id="acesso-rapido" class="mt-12 section-anchor">
             <h2 class="text-3xl font-bold text-center mb-4 text-teal-900">🚀 #semtempo? Sem problemas! 👇</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
 
@@ -147,7 +178,7 @@
         </section>
 
         <!-- Additional Resources Section -->
-        <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
+        <section id="recursos" class="mt-12 bg-white rounded-lg shadow-lg p-8 section-anchor">
             <h2 class="text-2xl font-bold text-center mb-6">Saiba Mais</h2>
             <div class="flex flex-wrap justify-center gap-6">
                 <a href="https://drive.google.com/file/d/1JUyyswUvtFPGTeRYKcfxySIP25z2Gtmv/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">
@@ -157,10 +188,10 @@
                     📊 Sala de Situação (Dados)
                 </a>
             </div>
-        </div>
+        </section>
 
-        <!-- Video Embed Section -->
-        <section class="mt-12">
+        <!-- Image Pack Section -->
+        <section id="pack-brasil" class="mt-12">
             <h2 class="text-2xl font-bold text-center mb-6">PACK Brasil</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-4 rounded-lg shadow-lg">
@@ -175,7 +206,7 @@
         </section>
         
         <!-- Interactive Quiz Section -->
-        <section class="mt-12">
+        <section id="quiz-secao" class="mt-12 section-anchor">
             <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
                 <h2 class="text-3xl font-bold text-center mb-8 text-teal-900">QUIZ</h2>
                 <div id="quiz-container" class="mx-auto max-w-2xl">
@@ -185,7 +216,7 @@
         </section>
 
         <!-- Final Test Button Section -->
-        <section class="mt-12 text-center">
+        <section id="curso-livre" class="mt-12 text-center section-anchor">
             <h2 class="text-3xl font-bold text-center mb-4 text-teal-900">Participe do Curso Livre</h2>
             <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">Aprofunde seu conhecimento e obtenha a certificação. Siga os passos abaixo para se inscrever e realizar o teste de aproveitamento.</p>
              <div class="flex flex-wrap justify-center gap-6">
@@ -231,6 +262,22 @@
     </div>
 
     <script>
+        // --- NAVIGATION SCRIPT ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
         // --- ACCORDION SCRIPT ---
         const accordionContainer = document.getElementById('accordion-container');
         if (accordionContainer) {
@@ -395,12 +442,4 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
 
