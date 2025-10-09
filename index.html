@@ -69,13 +69,21 @@
     </nav>
 
     <!-- Header Section (Hero) -->
-    <header class="bg-teal-50">
-        <div class="container mx-auto px-6 py-12 text-center">
+    <header class="relative" style="background-image: url('https://i.imgur.com/ZNY7lyS.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-teal-50/80"></div>
+        
+        <div class="relative container mx-auto px-6 py-12 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-teal-900">Esporotricose</h1>
             <p class="mt-4 text-lg text-teal-800">Um guia completo para os profissionais de saúde da Atenção Primária.</p>
-            <button id="open-modal-btn" class="mt-8 bg-white text-teal-700 font-bold py-2 px-6 rounded-full shadow-md hover:bg-slate-100 transition-transform transform hover:scale-105">
-                <i class="fas fa-graduation-cap mr-2"></i>Instruções do Curso
-            </button>
+            <div class="mt-8 flex justify-center items-center flex-wrap gap-4">
+                <button id="open-modal-btn" class="bg-white text-teal-700 font-bold py-2 px-6 rounded-full shadow-md hover:bg-slate-100 transition-transform transform hover:scale-105">
+                    <i class="fas fa-graduation-cap mr-2"></i>Curso Livre - Instruções
+                </button>
+                <a href="https://espfloripa.github.io/cursoslivres/" target="_blank" rel="noopener noreferrer" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition-transform transform hover:scale-105">
+                    <i class="fas fa-edit mr-2"></i>Curso Livre - Inscrição
+                </a>
+            </div>
         </div>
     </header>
 
@@ -217,14 +225,11 @@
 
         <!-- Final Test Button Section -->
         <section id="curso-livre" class="mt-12 text-center section-anchor">
-            <h2 class="text-3xl font-bold text-center mb-4 text-teal-900">Participe do Curso Livre</h2>
-            <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">Aprofunde seu conhecimento e obtenha a certificação. Siga os passos abaixo para se inscrever e realizar o teste de aproveitamento.</p>
+            <h2 class="text-3xl font-bold text-center mb-4 text-teal-900">Teste de Aproveitamento</h2>
+            <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">Após se inscrever e estudar o material, realize o teste de aproveitamento para obter sua certificação. Lembre-se, a nota de corte é 80%.</p>
              <div class="flex flex-wrap justify-center gap-6">
-                <a href="https://espfloripa.github.io/cursoslivres/" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105 inline-block">
-                    Inscrição para o curso livre
-                </a>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSc36Pm_4MgQikdut-NyW-KGjjZacl7pBAtaIR1mY2xVEwjkrw/viewform?usp=sharing&ouid=110410574929128285229" target="_blank" rel="noopener noreferrer" class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105 inline-block">
-                    Teste de aproveitamento
+                    Realizar teste de aproveitamento
                 </a>
             </div>
         </section>
@@ -250,8 +255,8 @@
             <div class="text-slate-700">
                 <ol class="list-decimal list-inside space-y-2">
                     <li>Este Curso Livre é voltado para profissionais de saúde de nível superior e será certificado com a carga horária de 2 horas/aula.</li>
-                    <li>Você deve clicar no botão disponível no fim desta página (ou <a href="https://espfloripa.github.io/cursoslivres/" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline font-semibold">aqui</a>) e preencher todos os campos para se inscrever no curso no mês corrente.</li>
-                    <li>Após a inscrição realizada, você tem até o último dia do mês para responder o teste de aproveitamento disponibilizado no botão no fim da página (não confundir com o Quiz!).</li>
+                    <li>Você deve clicar no botão ao lado (ou <a href="https://espfloripa.github.io/cursoslivres/" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline font-semibold">aqui</a>) e preencher todos os campos para se inscrever no curso no mês corrente.</li>
+                    <li>Após a inscrição realizada, você deve explorar o material e tem até o último dia do mês para responder o teste de aproveitamento disponibilizado no botão no fim da página (não confundir com o Quiz!).</li>
                     <li>Para responder o teste de aproveitamento você deve estar logado em uma conta Google, coloque o nome completo, CPF e e-mail conforme você colocou no link de inscrição.</li>
                     <li>A nota de corte para aprovação é de 80%.</li>
                     <li>O teste de aproveitamento só permite uma resposta por participante, caso você não seja aprovado poderá repetir o curso no mês seguinte.</li>
@@ -442,4 +447,8 @@
 
 </body>
 </html>
+
+
+
+
 
