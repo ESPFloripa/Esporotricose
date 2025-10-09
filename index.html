@@ -87,8 +87,16 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-10">
+    <!-- Start Section -->
+    <div id="start-section" class="text-center py-10 px-6">
+        <p class="mb-4 text-slate-600 font-medium">Antes de iniciar o curso leia as instruções e faça a sua inscrição acima!</p>
+        <button id="start-course-btn" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">
+            Iniciar
+        </button>
+    </div>
+
+    <!-- Main Content (Initially hidden) -->
+    <main id="main-content" class="container mx-auto px-6 py-10 hidden">
 
         <!-- Clinical Summary Section -->
         <section id="resumo-clinico" class="section-anchor">
@@ -267,6 +275,19 @@
     </div>
 
     <script>
+        // --- START COURSE SCRIPT ---
+        const startCourseBtn = document.getElementById('start-course-btn');
+        const mainContent = document.getElementById('main-content');
+        const startSection = document.getElementById('start-section');
+
+        if (startCourseBtn && mainContent && startSection) {
+            startCourseBtn.addEventListener('click', () => {
+                mainContent.classList.remove('hidden');
+                startSection.classList.add('hidden');
+                mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+        
         // --- NAVIGATION SCRIPT ---
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -447,8 +468,4 @@
 
 </body>
 </html>
-
-
-
-
 
