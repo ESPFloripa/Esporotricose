@@ -69,7 +69,7 @@
     </nav>
 
     <!-- Header Section (Hero) -->
-    <header class="relative" style="background-image: url('https://i.imgur.com/ZNY7lyS.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <header class="relative" style="background-image: url('https://i.imgur.com/ZNY7lyS.png'); background-size: contain; background-position: center; background-repeat: no-repeat;">
         <!-- Overlay -->
         <div class="absolute inset-0 bg-teal-50/80"></div>
         
@@ -139,7 +139,7 @@
                         <svg class="accordion-icon w-6 h-6 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="accordion-content">
-                        <p><strong>Primeira escolha:</strong> Itraconazol (200 mg/dia para adultos).<br><strong>Casos graves:</strong> Anfotericina B.<br><strong>Gestantes:</strong> Termoterapia (calor local) é a opção mais segura para casos não complicados.<br><strong>Atenção:</strong> Pacientes com cirurgia bariátrica podem ter má absorção do Itraconazol.</p>
+                        <p><strong>Primeira escolha:</strong> Itraconazol (200 mg/dia para adultos).<br><strong>Casos graves:</strong> Anfotericina B.<br><strong>Gestantes:</strong> Termoterapia (calor local) é a opção mais segura para casos não complicados.<br><strong>Atenção:</strong> Pacientes com cirurgia bariátrica tipo bypass gástrico em Y‐de‐Roux (BGYR) podem ter má absorção do Itraconazol.</p>
                     </div>
                 </div>
                 <!-- Accordion Item 5 -->
@@ -167,18 +167,16 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
 
                 <!-- Card: Podcast -->
-                <div class="card bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
-                    <div class="text-5xl mb-4">🎧</div>
-                    <h3 class="text-xl font-bold mb-2">Podcast-Resumo</h3>
-                    <p class="text-gray-600 mb-4">Sua dose de conhecimento no fone de ouvido! Perfeito para o trânsito, a pausa para o café ou enquanto se exercita.</p>
-                    <a href="https://drive.google.com/file/d/1b7QnQZibTN51XjQkoZDWZ9OJOB6wQVq4/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="mt-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-full transition-transform transform hover:scale-105">Ouvir Podcast</a>
+                <div class="card bg-white rounded-lg shadow-lg p-6 flex flex-col text-center">
+                    <h3 class="text-xl font-bold mb-4">Podcast-Resumo</h3>
+                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/1pXfgEG4Bwut5LQBQwBBiz?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
 
                 <!-- Card: Video -->
                 <div class="card bg-white rounded-lg shadow-lg p-6 flex flex-col text-center">
                     <h3 class="text-xl font-bold mb-4">Vídeo-Resumo</h3>
                     <div class="w-full aspect-video rounded-lg overflow-hidden">
-                       <iframe class="w-full h-full" src="https://www.youtube.com/embed/wkKjQXRtaxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                       <iframe class="w-full h-full" src="https://www.youtube.com/embed/es49Nhlmiwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
                 
@@ -203,21 +201,36 @@
                 <a href="https://salasituacao.shinyapps.io/painel_esporotricose/" target="_blank" rel="noopener noreferrer" class="bg-teal-700 hover:bg-teal-800 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">
                     📊 Sala de Situação (Dados)
                 </a>
+                <a href="https://drive.google.com/drive/folders/1qS1tdrhR9a2wv3g-2t_xpsrfe-ZD9k9P" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">
+                    📁 Pasta da Gestão da Clínica (outros materiais)
+                </a>
             </div>
         </section>
 
         <!-- Image Pack Section -->
         <section id="pack-brasil" class="mt-12">
-            <h2 class="text-2xl font-bold text-center mb-6">PACK Brasil</h2>
+            <h2 class="text-2xl font-bold text-center mb-6">
+                <a href="http://bit.ly/packfloripa2025" target="_blank" rel="noopener noreferrer" class="text-teal-900 hover:text-teal-700 underline">
+                    PACK Brasil <i class="fas fa-download fa-xs ml-2"></i>
+                </a>
+            </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-4 rounded-lg shadow-lg">
                     <img src="https://i.imgur.com/2sodxiN.png" alt="Fluxograma de diagnóstico para úlceras de pele que não cicatrizam" class="w-full h-auto rounded">
-                    <p class="text-center text-sm mt-2 text-gray-600">Fluxograma para diagnóstico diferencial de úlceras de pele.</p>
+                    <p class="text-center text-sm mt-2 text-gray-600">Fluxograma para diagnóstico diferencial de úlceras ou feridas de pele que não cicatrizam</p>
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow-lg">
                     <img src="https://i.imgur.com/meQoPeB.png" alt="Nódulos na pele" class="w-full h-auto rounded">
-                    <p class="text-center text-sm mt-2 text-gray-600">Exemplos de nódulos e lesões cutâneas.</p>
+                    <p class="text-center text-sm mt-2 text-gray-600">Fluxograma para diagnóstico diferencial de nódulos na pele</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Animal Evaluation Section -->
+        <section id="avaliacao-animal" class="mt-12 section-anchor">
+            <h2 class="text-2xl font-bold text-center mb-6 text-teal-900">Avaliação Animal</h2>
+            <div class="bg-white p-4 rounded-lg shadow-lg max-w-4xl mx-auto">
+                <img src="https://i.imgur.com/XuxgE20.png" alt="Fluxograma de avaliação de animal com suspeita de esporotricose" class="w-full h-auto rounded">
             </div>
         </section>
         
@@ -249,7 +262,7 @@
         <div class="container mx-auto px-6 py-6 text-center">
             <p>&copy; 2025 Secretaria Municipal de Saúde de Florianópolis</p>
             <p class="text-sm text-slate-400 mt-2">Conhecimento prático para otimizar sua rotina. Acesse os novos formatos para ficar por dentro de tudo!</p>
-            <p class="text-xs text-slate-500 mt-4">Este material foi produzido pelo Departamento de Gestão da Clínica em parceria com a Escola de Saúde Pública de Florianópolis.</p>
+            <p class="text-xs text-slate-500 mt-4">Esta é uma produção da Escola de Saúde Pública de Florianópolis em parceria com Departamento de Gestão da Clínica.</p>
         </div>
     </footer>
 
@@ -468,4 +481,6 @@
 
 </body>
 </html>
+
+
 
